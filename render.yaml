@@ -12,18 +12,15 @@ services:
         fromDatabase:
           name: sensorzone-database-production
           property: connectionString
-      # pick the region closest to your database
-      # For example, us-west-2 for the Oregon region
+      # The AWS region of the backup bucket
       - key: AWS_REGION
         sync: false 
       # A globally unique name for your bucket
       # For example, <your-username>-<database name>-render-postgres-backups
       - key: S3_BUCKET_NAME
         sync: false
-      # Looks like "AKIAXXXXXXXXXXXXXXXX"
-      - key: AWS_ACCESS_KEY_ID
-        sync: false
-      - key: AWS_SECRET_ACCESS_KEY
+      # IAM role assumed by this cron job through Render-managed OIDC
+      - key: AWS_ROLE_ARN
         sync: false
       # Postgres version of your Postgres instance 
       # For example, 16
